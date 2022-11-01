@@ -105,7 +105,7 @@
         @did-dismiss="isModalOpen = false">
             <ion-content>
                 <ion-item lines="none">
-                <ion-label position="floating">New message to seller</ion-label>
+                <ion-label position="floating">Enter your message</ion-label>
                 <ion-textarea v-model="newMessageText"></ion-textarea>
                 <ion-button @click="addNewMessage">Send message</ion-button>
                 </ion-item>
