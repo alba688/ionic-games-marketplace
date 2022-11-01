@@ -21,7 +21,7 @@ import { ref } from 'vue';
       price: 350,
       condition: "Used",
       address: "Blueveien 40",
-      imageURL: "https://www.playerschoicevideogames.com/prod_images_blowup/crashteamracing.jpg"
+      imageURL: "https://obriens.no/40316-large_default/crash-bandicoot-the-wrath-of-cortex-playstation-2.jpg"
     }
   ]);
 
@@ -35,7 +35,7 @@ import { ref } from 'vue';
         price: 175,
         condition: "Used",
         address: "Lillaveien 50",
-        imageURL: "https://upload.wikimedia.org/wikipedia/en/1/16/Froggercover.png"
+        imageURL: "https://i.ytimg.com/vi/mzLAZoOUMso/hqdefault.jpg"
       }
     );
   gameAdvertisements.value.unshift(newGame);
