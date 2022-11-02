@@ -100,13 +100,13 @@
        <!-- Modal -->
        <ion-modal 
         :is-open="isModalOpen" 
-        :initial-breakpoint="0.25" 
+        :initial-breakpoint="0.5" 
         :breakpoints="[0, 0.25, 0.5, 0.75]"
         @did-dismiss="isModalOpen = false">
             <ion-content>
                 <ion-item lines="none">
-                <ion-label position="floating">Enter your message</ion-label>
-                <ion-textarea v-model="newMessageText"></ion-textarea>
+                <ion-label position="floating">Message to seller</ion-label>
+                <ion-textarea class="ion-padding-bottom" placeholder="Write message here" v-model="newMessageText"></ion-textarea>
                 <ion-button @click="addNewMessage">Send message</ion-button>
                 </ion-item>
             </ion-content>
