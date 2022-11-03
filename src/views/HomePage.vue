@@ -45,28 +45,27 @@ import { ref } from 'vue';
 
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Retro Game Market 🎮</ion-title>
-        <ion-buttons slot="end">
-          <ion-button v-on:click="addGameAdvertisement">+</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    
-    <ion-content :fullscreen="true">
-      <ion-card v-for="game in gameAdvertisements" :key="game.id" :router-link="'/detail/' + game.id">
-        <img :src="game.imageURL" height="150" :alt="'image of ' + game.title"/>
-        <ion-card-header>
-          <ion-card-subtitle>{{game.price}} kr</ion-card-subtitle>
-          <ion-card-title>{{ game.title}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          {{game.description}}
-        </ion-card-content>
-      </ion-card>
-    </ion-content>
-  </ion-page>
+  
+  <ion-content :fullscreen="true">
+    <ion-card>
+      <ion-img
+          src="https://illlustrations.co/static/a8bffeb0395117a5c2d54c770d50e80e/ee604/day2-gaming-console.png"/>
+
+          <h1
+          class="ion-text-center ion-padding-bottom"
+          color="primary">Welcome to RetroTise</h1>
+    </ion-card>
+
+    <ion-button router-link="/login" expand="block" fill="solid" color="primary" class="ion-padding ion-padding-bottom">
+      Login to RetroTise
+    </ion-button>
+    <ion-button router-link="/market" expand="block" fill="outline" color="primary" class="ion-padding">
+      View Marketplace
+    </ion-button>
+
+
+  </ion-content>
+</ion-page>
 </template>
 
 <style scoped>

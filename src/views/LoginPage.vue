@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonContent, IonButton, IonImg, IonToggle, IonInput, IonList, IonListHeader, IonItem, IonLabel, IonPage} from '@ionic/vue';
+import { IonContent, IonButton, IonImg, IonToggle, IonInput, IonList, IonListHeader, IonItem, IonLabel, IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle} from '@ionic/vue';
 import { ref } from 'vue';
 
     
@@ -20,16 +20,20 @@ import { ref } from 'vue';
     <ion-page>
   
       <ion-content :fullscreen="true">
-        <ion-list>
+        <ion-header :translucent="true">
+          <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button default-href="/"></ion-back-button>
+            </ion-buttons>
+            <ion-title>Login Page</ion-title>
+          </ion-toolbar>
+        </ion-header>
             <ion-img
               src="https://illlustrations.co/static/a8bffeb0395117a5c2d54c770d50e80e/ee604/day2-gaming-console.png"/>
-              <ion-list-header>
-              <ion-label
+
+              <h1
               class="ion-text-center ion-padding-bottom"
-              color="primary">Welcome to RetroSpill</ion-label>
-            </ion-list-header>
-            
-        </ion-list>
+              color="primary">Login to RetroTise</h1>
 
         <ion-item lines="none">
           <ion-label class="label-mild">New user?</ion-label>
@@ -52,11 +56,11 @@ import { ref } from 'vue';
         </ion-item>
 
         <ion-button v-if="inRegisterMode" class="button-auth" expand="block" fill="solid" color="primary" size="default">
-          Registrer
+          Register
         </ion-button>
 
         <ion-button v-else class="button-auth" expand="block" fill="solid" color="primary" size="default">
-          Log in
+          Login
         </ion-button>
 
       </ion-content>
