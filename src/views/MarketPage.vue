@@ -14,6 +14,12 @@ import { logInOutline, add } from 'ionicons/icons';
           id,
           title,
           price,
+          platform, 
+          description,
+          condition,
+          image {
+            id
+          },
           user_created {
             first_name
           }
