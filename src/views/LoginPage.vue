@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { authService } from '@/services/directus.service';
-import { IonContent, IonButton, IonImg, IonToggle, IonInput, IonList, IonListHeader, IonItem, IonLabel, IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle} from '@ionic/vue';
+import { IonContent, IonButton, IonImg, IonToggle, IonInput, IonItem, IonLabel, IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle} from '@ionic/vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

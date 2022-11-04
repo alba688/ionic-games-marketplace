@@ -4,6 +4,7 @@ import HomePage from '../views/HomePage.vue'
 import MarketPage from '../views/MarketPage.vue'
 import DetailPage from '../views/DetailPage.vue'
 import LoginPage from '../views/LoginPage.vue'
+import AddGamePage from '../views/AddGamePage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: LoginPage
+  },
+  {
+    path: '/add',
+    name: 'Add',
+    component: AddGamePage
   },
 ]
 
