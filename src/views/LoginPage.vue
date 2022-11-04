@@ -1,19 +1,32 @@
 <script setup lang="ts">
+import { authService } from '@/services/directus.service';
 import { IonContent, IonButton, IonImg, IonToggle, IonInput, IonList, IonListHeader, IonItem, IonLabel, IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle} from '@ionic/vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+  const router = useRouter();
     
-    /* State */
+  /* State */
 
-    // The user can toggle between login and register mode in the form to show/hide additional fields
-    const inRegisterMode = ref(false);
+  // The user can toggle between login and register mode in the form to show/hide additional fields
+  const inRegisterMode = ref(false);
 
-    // Provides two-way data binding between Vue and the input fields in the form
-    const userDetails = ref({
-        firstName: '',
-        email: '',
-        password: ''
-    });
+  // Provides two-way data binding between Vue and the input fields in the form
+  const userDetails = ref({
+      firstName: '',
+      email: '',
+      password: ''
+  });
+
+  const login = async () => {
+    try {
+      await authService.login(userDetails.value.email, userDetails.value.password);
+      router.replace('/market');
+    } catch (error) {
+      console.error(error);
+    }
+    
+  }
 </script>
 
 <template>
@@ -41,7 +54,7 @@ import { ref } from 'vue';
         </ion-item>
 
         <ion-item v-if="inRegisterMode">
-          <ion-label class="label-mild" position="floating">Fornavn</ion-label>
+          <ion-label class="label-mild" position="floating">First Name</ion-label>
           <ion-input v-model="userDetails.firstName"></ion-input>
         </ion-item>
 
@@ -51,7 +64,7 @@ import { ref } from 'vue';
         </ion-item>
 
         <ion-item>
-            <ion-label class="label-mild" position="floating">Passord</ion-label>
+            <ion-label class="label-mild" position="floating">Password</ion-label>
             <ion-input type="password" v-model="userDetails.password"></ion-input>
         </ion-item>
 
@@ -59,7 +72,7 @@ import { ref } from 'vue';
           Register
         </ion-button>
 
-        <ion-button v-else class="button-auth" expand="block" fill="solid" color="primary" size="default">
+        <ion-button @click="login" v-else class="button-auth" expand="block" fill="solid" color="primary" size="default">
           Login
         </ion-button>
 
