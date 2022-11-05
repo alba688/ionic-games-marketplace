@@ -1,10 +1,16 @@
 <script setup lang="ts">
-    import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, IonToolbar, } from '@ionic/vue';
+    import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, IonToolbar, IonImg, toastController, IonSelect, IonSelectOption } from '@ionic/vue';
+    import { directus } from '@/services/directus.service';
     import { ref } from 'vue';
+    import { Camera, CameraResultType } from '@capacitor/camera';
+    import { trashOutline } from 'ionicons/icons';
+    import { useRouter } from 'vue-router';
+
+  const router = useRouter();
 
 
     // For feedback on upload
-    //const isUploadingGame = ref(false);
+    const isUploadingGame = ref(false);
     
     // Keeps track of all data input from the user towards adding a new camp spot
     const newGame = ref({
@@ -12,12 +18,12 @@
         description: "",
         price: "",
         platform: "",
-        condition: [],
+        condition: "",
         image: ""
     });
 
     // Run Camera
-    /* 
+
     const triggerCamera = async () => {
         const photo = await Camera.getPhoto({
             quality: 100,
@@ -29,16 +35,21 @@
             newGame.value.image = photo.webPath;
         }
     }
-    */
+
+    // Handle condition select
+    const handleChange = (e: CustomEvent) => {
+        newGame.value.condition = e.detail.value;
+        console.log(newGame.value.condition)
+    }
     
     // Handle data POSTing
-    /*
+
     const postNewGame = async () => {
         // TODO Logic to post the camp spot to the backend/Directus
         console.log(newGame.value);
 
         if(!newGame.value.image) {
-            alert("Image upload required.");
+            alert("Image required.");
             return;
         }
 
@@ -53,12 +64,12 @@
             const fileUpload = await directus.files.createOne(formData);
 
             if (fileUpload) {
-                await directus.items('camping_spots').createOne({
+                await directus.items('game_market').createOne({
                     title: newGame.value.title,
                     description: newGame.value.description,
                     price: newGame.value.price,
                     platform: newGame.value.platform,
-                    condition: [],
+                    condition: newGame.value.condition,
                     image: fileUpload.id
                 });
 
@@ -73,6 +84,7 @@
             }
 
             isUploadingGame.value = false;
+            router.replace('/market');
 
         } catch (error) {
             const errorToast = await toastController.create({
@@ -87,15 +99,11 @@
             isUploadingGame.value = false;
         }
     }
-    */
-
 
     // Handle (preview) image removal
-    /*
     const removeImagePreview = () => {
         newGame.value.image = '';
     }
-    */
     
     </script>
 
@@ -115,21 +123,46 @@
             <ion-list>
 
                 <!-- Logic for file picking / using camera will be added later -->
-                <button class="image-picker">
+                <ion-button v-if="!newGame.image" @click="triggerCamera" fill="clear" class="image-picker">
                     Choose file or take a picture 📸
-                </button>
+                </ion-button>
+
+                <section v-if="newGame.image">
+                    <ion-button @click="removeImagePreview" fill="default" class="remove-image-preview">
+                            <ion-icon slot="icon-only" :icon="trashOutline" color="danger"></ion-icon>
+                    </ion-button>
+                    <ion-img :src="newGame.image" class="image-preview"/>
+                </section>
+
+                <ion-list>
+                    <ion-item>
+                        <ion-select @ionChange="handleChange($event)" interface="popover" placeholder="Select condition">
+                            <ion-select-option value="1">New</ion-select-option>
+                            <ion-select-option value="2">Used</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-list>
 
                 <ion-item>
                     <ion-label class="label-mild" position="floating">Title</ion-label>
-                    <ion-input type="text" v-model="newGame.title"></ion-input>
+                    <ion-textarea type="text" v-model="newGame.title"></ion-textarea>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-label class="label-mild" position="floating">Description</ion-label>
+                    <ion-textarea type="text" v-model="newGame.description"></ion-textarea>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label class="label-mild" position="floating">Description</ion-label>
-                    <ion-textarea type="password" v-model="newGame.description"></ion-textarea>
+                    <ion-label class="label-mild" position="floating">Price</ion-label>
+                    <ion-textarea type="text" v-model="newGame.price"></ion-textarea>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="label-mild" position="floating">Platform</ion-label>
+                    <ion-textarea type="text" v-model="newGame.platform"></ion-textarea>
                 </ion-item>
 
-                <ion-button class="button-add" fill="solid" color="secondary" size="default">
+                <ion-button @click="postNewGame" class="button-add" fill="solid" color="secondary" size="default">
                     Send in 🎮
                 </ion-button>
 
@@ -155,12 +188,14 @@ ion-list {
 }
 
 .image-picker {
-    height: 30vh;
+    height: 20vh;
     margin: 10px;
     border: 2px #8a8a8a dashed;
     border-radius: 8px;
     font-size: medium;
 }
+
+
 
 .button-add {
     margin-top: 50px;

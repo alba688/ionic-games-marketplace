@@ -62,7 +62,7 @@ import { logInOutline, add } from 'ionicons/icons';
         </ion-card-content>
       </ion-card>
         <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-            <ion-fab-button>
+            <ion-fab-button router-link="/add">
                 <ion-icon :icon="add"></ion-icon>
             </ion-fab-button>
         </ion-fab>

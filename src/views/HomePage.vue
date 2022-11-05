@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonContent, IonPage, IonCard, IonButton} from '@ionic/vue';
+import { IonContent, IonPage, IonCard, IonButton, IonImg} from '@ionic/vue';
 
   /* const addGameAdvertisement = () => {
     const newGame = (

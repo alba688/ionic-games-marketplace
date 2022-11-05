@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@capacitor/app": "4.1.0",
+    "@capacitor/camera": "^4.1.3",
     "@capacitor/core": "4.4.0",
     "@capacitor/haptics": "4.0.1",
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
     "@directus/sdk": "^10.1.5",
+    "@ionic/pwa-elements": "^3.1.1",
     "@ionic/vue": "^6.0.0",
     "@ionic/vue-router": "^6.0.0",
     "core-js": "^3.6.5",
@@ -25,7 +27,6 @@
   },
   "devDependencies": {
     "@capacitor/cli": "4.4.0",
-    "@ionic/prettier-config": "^2.0.0",
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
@@ -44,7 +45,6 @@
     "eslint": "^8.4.1",
     "eslint-plugin-vue": "^8.2.0",
     "jest": "^27.3.1",
-    "prettier": "@ionic/prettier-config",
     "ts-jest": "^27.0.7",
     "typescript": "^4.3.5"
   },
