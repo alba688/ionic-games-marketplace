@@ -1,37 +1,55 @@
 <script setup lang="ts">
     import { useRoute } from 'vue-router';
-    import { IonContent, IonPage, IonHeader, IonTitle, IonCardTitle, IonCardSubtitle, IonCardContent, IonToolbar, IonButtons, IonButton, IonBackButton, IonCard, IonCardHeader, IonIcon, IonModal, IonTextarea, IonList, IonListHeader, IonLabel, IonItem, IonAvatar, IonText} from '@ionic/vue';
+    import { IonContent, IonPage, IonHeader, IonTitle, IonCardTitle, IonCardSubtitle, IonCardContent, IonToolbar, IonButtons, IonButton, IonBackButton, IonCard, IonCardHeader, IonIcon, IonModal, IonTextarea, IonList, IonListHeader, IonLabel, IonItem, IonAvatar, IonText, onIonViewDidEnter, IonSpinner} from '@ionic/vue';
     import { ref } from 'vue';
     import { chatboxOutline, person, chatboxEllipsesOutline } from 'ionicons/icons';
+    import { directus } from '@/services/directus.service';
 
     /* Routing */
     const route = useRoute();
     const { id } = route.params;
+    
+    const userAccessToken = localStorage.getItem('auth_token');
 
     /* States */
     const isModalOpen = ref(false);
     const newMessageText = ref("");
+    const isLoadingDetail = ref(true);
 
     /* Dummy data */
-    const gameDetail = ref({
-        id: 3,
-        title: "Frogger",
-        description: "Hop through nine gaming worlds and dozens of levels based on themes from the original game.",
-        platform: "Playstation",
-        price: 175,
-        condition: "Used",
-        address: "Lillaveien 50",
-        imageURL: "https://i.ytimg.com/vi/mzLAZoOUMso/hqdefault.jpg",
-        messages: [
-            {
-                id: 1,
-                username: "gameLover123",
-                text: "Let me know if you have any questions!"
-            }
-        ]
-    });
+    const gameDetail = ref(null);
 
-    /* New message */
+    onIonViewDidEnter(() => {
+      fetchGameById();
+    })
+
+    const fetchGameById = async () => {
+      const response = await directus.graphql.items(`
+      query {
+        game_market_by_id(id:${id}) {
+          id,
+          title,
+          price,
+          platform, 
+          description,
+          condition,
+          image {
+            id
+          },
+          user_created {
+            first_name
+          }
+        }
+      }
+      `);
+
+      if (response.status === 200 && response.data) {
+        gameDetail.value = response.data.game_market_by_id;
+        isLoadingDetail.value = false;
+      }
+    }
+
+    /* New message 
     const addNewMessage = () => {
         gameDetail.value.messages.unshift({
             id: 3,
@@ -41,7 +59,7 @@
 
         isModalOpen.value = false;
         newMessageText.value = "";
-    }
+    }*/
 </script>
 
 <template>
@@ -49,9 +67,10 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button default-href="/"></ion-back-button>
+            <ion-back-button default-href="/market"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{gameDetail.title}} ({{ id }})</ion-title>
+        <ion-title v-if="isLoadingDetail"><ion-spinner></ion-spinner></ion-title>
+        <ion-title v-if="gameDetail">{{gameDetail.title}}</ion-title>
         <ion-buttons slot="end">
             <ion-button @click="isModalOpen = true">
               <ion-icon :icon="chatboxEllipsesOutline"></ion-icon>
@@ -60,9 +79,9 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true">
+    <ion-content :fullscreen="true" v-if="gameDetail && !isLoadingDetail">
         <ion-card>
-            <img :src="gameDetail.imageURL" :alt="gameDetail.title" />
+            <img :src="`https://q4vuzuzc.directus.app/assets/${gameDetail.image.id}?access_token=${userAccessToken}`" />
             <ion-card-header>
                  <ion-card-title>{{gameDetail.price}} kr</ion-card-title>
                 <ion-card-subtitle>{{gameDetail.platform}}</ion-card-subtitle>
@@ -107,7 +126,7 @@
                 <ion-item lines="none">
                 <ion-label position="floating">Message to seller</ion-label>
                 <ion-textarea class="ion-padding-bottom" placeholder="Write message here" v-model="newMessageText"></ion-textarea>
-                <ion-button @click="addNewMessage">Send message</ion-button>
+                <ion-button>Send message</ion-button>
                 </ion-item>
             </ion-content>
         </ion-modal>

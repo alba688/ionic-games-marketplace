@@ -42,7 +42,7 @@ import { logInOutline, add } from 'ionicons/icons';
         <ion-buttons slot="start">
           <ion-button>+</ion-button>
         </ion-buttons>
-        <ion-title>RetroTise Market 🎮</ion-title>
+        <ion-title>RetroTise 🎮</ion-title>
         <ion-buttons slot="end">
             <ion-button router-link="/login">
               <ion-icon :icon="logInOutline"></ion-icon>
