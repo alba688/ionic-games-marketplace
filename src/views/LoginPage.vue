@@ -26,6 +26,18 @@ import { useRouter } from 'vue-router';
       console.error(error);
     }
   }
+
+  const register = async () => {
+    try {
+      const wasRegistered = await authService.register(userDetails.value.firstName, userDetails.value.email, userDetails.value.password);
+      if (wasRegistered) {
+        await login();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 </script>
 
 <template>
@@ -67,7 +79,7 @@ import { useRouter } from 'vue-router';
             <ion-input type="password" v-model="userDetails.password"></ion-input>
         </ion-item>
 
-        <ion-button v-if="inRegisterMode" class="button-auth" expand="block" fill="solid" color="primary" size="default">
+        <ion-button @click="register" v-if="inRegisterMode" class="button-auth" expand="block" fill="solid" color="primary" size="default">
           Register
         </ion-button>
 

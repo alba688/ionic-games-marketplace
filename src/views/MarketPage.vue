@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { directus } from '@/services/directus.service';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButtons, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonIcon, IonFab, IonFabButton, onIonViewDidEnter } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButtons, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent } from '@ionic/vue';
 import { ref } from 'vue';
 import { logInOutline, person, add } from 'ionicons/icons';
 
 
   const gameAdvertisements = ref([]);
 
-  onIonViewDidEnter(async () => {
+  onIonViewDidEnter(() => {
+      fetchAllGames();
+  })
+
+  const refreshGamesView = async (event: CustomEvent) => {
+    await fetchAllGames();
+    event.target.complete();
+  }
+
+  const fetchAllGames = async () => {
     const response = await directus.graphql.items(`
       query {
         game_market {
@@ -26,7 +35,7 @@ import { logInOutline, person, add } from 'ionicons/icons';
       gameAdvertisements.value = [...response.data.game_market];
       console.log(gameAdvertisements.value);
     }
-  });
+  };
 
 </script>
 
@@ -49,6 +58,9 @@ import { logInOutline, person, add } from 'ionicons/icons';
     </ion-header>
     
     <ion-content :fullscreen="true">
+      <ion-refresher slot="fixed" @ionRefresh="refreshGamesView($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ion-card v-for="game in gameAdvertisements" :key="game.id" :router-link="'/detail/' + game.id">
         <ion-card-header>
           <img :src="`https://q4vuzuzc.directus.app/assets/${game.image.id}`"/>

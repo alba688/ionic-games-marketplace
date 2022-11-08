@@ -6,6 +6,40 @@ import DetailPage from '../views/DetailPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import AddGamePage from '../views/AddGamePage.vue'
 import ProfilePage from '../views/ProfilePage.vue'
+import { authService } from '@/services/directus.service';
+import { toastController } from '@ionic/vue';
+
+const loginRequiredRouteGuard = async () => {
+  const userAccessToken = localStorage.getItem("auth_token");
+  if (!userAccessToken) {
+    const errorToast = await toastController.create({
+      message: "You must first login or register",
+      duration: 3000,
+      color: "warning"
+    });
+
+    await errorToast.present();
+
+    return { name: "Login" }
+  }
+
+  const userAccessTokenExpiresAt = localStorage.getItem("auth_expires_at") as unknown as number;
+  if (userAccessTokenExpiresAt < new Date().getTime()) {
+
+    const errorToast = await toastController.create({
+      message: "User session is expired. Login again.",
+      duration: 3000,
+      color: "warning"
+    });
+
+    await errorToast.present();
+
+    await authService.logout();
+    return { name: "Login" }
+  }
+
+
+} 
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,7 +59,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/detail/:id',
     name: 'Detail',
-    component: DetailPage
+    component: DetailPage,
+    beforeEnter: [loginRequiredRouteGuard]
   },
   {
     path: '/login',
@@ -35,12 +70,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/add',
     name: 'Add',
-    component: AddGamePage
+    component: AddGamePage,
+    beforeEnter: [loginRequiredRouteGuard]
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: ProfilePage
+    component: ProfilePage,
+    beforeEnter: [loginRequiredRouteGuard]
   }
 ]
 

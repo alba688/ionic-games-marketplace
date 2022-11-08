@@ -89,6 +89,7 @@
             </ion-card-header>
             <ion-card-content>
                 <div>{{gameDetail.description}}</div>
+
             </ion-card-content>
         </ion-card>
 
@@ -97,7 +98,7 @@
         <ion-list>
           <ion-list-header>
             <ion-label>
-              Messages <ion-icon :icon="chatboxOutline"></ion-icon>
+              Message {{gameDetail.user_created.first_name}} <ion-icon :icon="chatboxOutline"></ion-icon>
             </ion-label>
           </ion-list-header>
           <ion-item v-for="message in gameDetail.messages" :key="message.id" lines="none">
