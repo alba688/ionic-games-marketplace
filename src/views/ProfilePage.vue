@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { IonContent, IonPage, IonCard, IonButton, IonToolbar, IonButtons, IonBackButton, IonTitle} from '@ionic/vue';
+import { authService } from '@/services/directus.service';
+import { useRouter } from 'vue-router';
 
+  const router = useRouter();
+
+  const logout = async () => {
+    await authService.logout();
+    router.replace('/home');
+      
+  }
+
+  
 </script>
 
 <template>
@@ -17,7 +28,7 @@ import { IonContent, IonPage, IonCard, IonButton, IonToolbar, IonButtons, IonBac
         <ion-button router-link="/add" expand="block" fill="solid" color="primary" class="ion-padding">
       Add game to marketplace
         </ion-button>
-        <ion-button expand="block" fill="outline" color="primary" class="ion-padding">
+        <ion-button @click="logout" expand="block" fill="outline" color="primary" class="ion-padding">
       Log out of RetroTise
         </ion-button>
     </ion-card>
