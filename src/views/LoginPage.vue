@@ -22,6 +22,7 @@ import { useRouter } from 'vue-router';
     try {
       await authService.login(userDetails.value.email, userDetails.value.password);
       router.replace('/market');
+
     } catch (error) {
       console.error(error);
     }

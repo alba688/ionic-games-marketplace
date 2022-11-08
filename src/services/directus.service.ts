@@ -15,12 +15,12 @@ export const authService = {
     },
     async currentUser() {
       return await directus.users.me.read({
-          fields: ['email', 'username']
+          fields: ['email', 'first_name']
       });
     },
-    async register(username: string, email: string, password: string): Promise<boolean> {
+    async register(firstName: string, email: string, password: string): Promise<boolean> {
       const createUserResult = await directus.users.createOne({
-        username: username,
+        first_name: firstName,
         email,
         password,
         role: "5ce5d2c5-d248-45f9-b05c-d0a014cf5dd5"
