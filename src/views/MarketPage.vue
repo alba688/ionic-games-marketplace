@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { directus } from '@/services/directus.service';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButtons, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent } from '@ionic/vue';
 import { ref } from 'vue';
 import { logInOutline, person, add } from 'ionicons/icons';
+import GameCard from '@/components/GameCard.vue';
 
 
   const gameAdvertisements = ref([]);
@@ -61,16 +62,8 @@ import { logInOutline, person, add } from 'ionicons/icons';
       <ion-refresher slot="fixed" @ionRefresh="refreshGamesView($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
-      <ion-card v-for="game in gameAdvertisements" :key="game.id" :router-link="'/detail/' + game.id">
-        <ion-card-header>
-          <img :src="`https://q4vuzuzc.directus.app/assets/${game.image.id}`"/>
-          <ion-card-title>{{ game.title}}</ion-card-title>
-          <ion-card-subtitle>
-            {{game.platform}} ({{game.condition}})
-          </ion-card-subtitle>
-      </ion-card-header>
+      <game-card v-for="game in gameAdvertisements" :key="game.id" :game="game"/>
         
-      </ion-card>
         <ion-fab slot="fixed" vertical="bottom" horizontal="end">
             <ion-fab-button router-link="/add">
                 <ion-icon :icon="add"></ion-icon>
