@@ -2,7 +2,7 @@
 import { directus } from '@/services/directus.service';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonButtons, IonButton, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonIcon, IonFab, IonFabButton, onIonViewDidEnter } from '@ionic/vue';
 import { ref } from 'vue';
-import { logInOutline, add } from 'ionicons/icons';
+import { logInOutline, person, add } from 'ionicons/icons';
 
 
   const gameAdvertisements = ref([]);
@@ -33,7 +33,9 @@ import { logInOutline, add } from 'ionicons/icons';
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-button>+</ion-button>
+          <ion-button router-link="/profile">
+            <ion-icon :icon="person"></ion-icon>
+          </ion-button>
         </ion-buttons>
         <ion-title>RetroTise 🎮</ion-title>
         <ion-buttons slot="end">

@@ -5,6 +5,7 @@ import MarketPage from '../views/MarketPage.vue'
 import DetailPage from '../views/DetailPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import AddGamePage from '../views/AddGamePage.vue'
+import ProfilePage from '../views/ProfilePage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -36,6 +37,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Add',
     component: AddGamePage
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: ProfilePage
+  }
 ]
 
 const router = createRouter({

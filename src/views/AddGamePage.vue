@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, IonToolbar, IonImg, toastController, IonSelect, IonSelectOption } from '@ionic/vue';
+    import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, IonToolbar, IonImg, toastController, IonSelect, IonSelectOption, IonSpinner } from '@ionic/vue';
     import { directus } from '@/services/directus.service';
     import { ref } from 'vue';
     import { Camera, CameraResultType } from '@capacitor/camera';
@@ -162,8 +162,9 @@
                     <ion-textarea type="text" v-model="newGame.platform"></ion-textarea>
                 </ion-item>
 
-                <ion-button @click="postNewGame" class="button-add" fill="solid" color="secondary" size="default">
-                    Send in 🎮
+                <ion-button @click="postNewGame" class="button-add" :disabled="isUploadingGame" fill="solid" color="secondary" size="default">
+                    <ion-spinner v-if="isUploadingGame" name="dots"></ion-spinner>
+                    <span>Send in 🎮</span>
                 </ion-button>
 
             </ion-list>
@@ -195,7 +196,17 @@ ion-list {
     font-size: medium;
 }
 
+.image-preview {
+        height: 30vh;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+}
 
+.remove-image-preview {
+    position: absolute;
+    right: 0;
+    }
 
 .button-add {
     margin-top: 50px;
