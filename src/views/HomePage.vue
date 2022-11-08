@@ -1,22 +1,6 @@
 <script setup lang="ts">
 import { IonContent, IonPage, IonCard, IonButton, IonImg} from '@ionic/vue';
 
-  /* const addGameAdvertisement = () => {
-    const newGame = (
-      {
-        id: 3,
-        title: "Frogger",
-        description: "Hop through nine gaming worlds and dozens of levels based on themes from the original game.",
-        platform: "Playstation",
-        price: 175,
-        condition: "Used",
-        address: "Lillaveien 50",
-        imageURL: "https://i.ytimg.com/vi/mzLAZoOUMso/hqdefault.jpg"
-      }
-    );
-  gameAdvertisements.value.unshift(newGame); 
-}*/
-
 </script>
 
 <template>

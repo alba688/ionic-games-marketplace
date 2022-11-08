@@ -15,14 +15,7 @@ import { logInOutline, add } from 'ionicons/icons';
           title,
           price,
           platform, 
-          description,
           condition,
-          image {
-            id
-          },
-          user_created {
-            first_name
-          }
         }
       }
     `);
@@ -58,7 +51,7 @@ import { logInOutline, add } from 'ionicons/icons';
           <ion-card-title>{{ game.title}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          {{game.description}}
+          {{game.platform}} ({{game.condition}})
         </ion-card-content>
       </ion-card>
         <ion-fab slot="fixed" vertical="bottom" horizontal="end">

@@ -6,7 +6,7 @@
     import { trashOutline } from 'ionicons/icons';
     import { useRouter } from 'vue-router';
 
-  const router = useRouter();
+    const router = useRouter();
 
 
     // For feedback on upload
