@@ -137,8 +137,8 @@
                 <ion-list>
                     <ion-item>
                         <ion-select @ionChange="handleChange($event)" interface="popover" placeholder="Select condition">
-                            <ion-select-option value="1">New</ion-select-option>
-                            <ion-select-option value="2">Used</ion-select-option>
+                            <ion-select-option value="New">New</ion-select-option>
+                            <ion-select-option value="Used">Used</ion-select-option>
                         </ion-select>
                     </ion-item>
                 </ion-list>

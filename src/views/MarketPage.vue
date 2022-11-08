@@ -13,9 +13,11 @@ import { logInOutline, person, add } from 'ionicons/icons';
         game_market {
           id,
           title,
-          price,
           platform, 
           condition,
+          image {
+            id,
+          },
         }
       }
     `);
@@ -49,12 +51,13 @@ import { logInOutline, person, add } from 'ionicons/icons';
     <ion-content :fullscreen="true">
       <ion-card v-for="game in gameAdvertisements" :key="game.id" :router-link="'/detail/' + game.id">
         <ion-card-header>
-          <ion-card-subtitle>{{game.price}} kr</ion-card-subtitle>
+          <img :src="`https://q4vuzuzc.directus.app/assets/${game.image.id}`"/>
           <ion-card-title>{{ game.title}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          {{game.platform}} ({{game.condition}})
-        </ion-card-content>
+          <ion-card-subtitle>
+            {{game.platform}} ({{game.condition}})
+          </ion-card-subtitle>
+      </ion-card-header>
+        
       </ion-card>
         <ion-fab slot="fixed" vertical="bottom" horizontal="end">
             <ion-fab-button router-link="/add">
