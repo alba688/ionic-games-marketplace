@@ -1,5 +1,9 @@
 <script setup lang="ts">
-    defineProps(["imageId"]);
+
+interface Props {
+    imageId: string;
+}
+defineProps<Props>();
 </script>
 
 <template>

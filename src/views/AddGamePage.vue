@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, IonToolbar, IonImg, toastController, IonSelect, IonSelectOption, IonSpinner } from '@ionic/vue';
-    import { directus } from '@/services/directus.service';
-    import { ref } from 'vue';
-    import { Camera, CameraResultType } from '@capacitor/camera';
-    import { trashOutline } from 'ionicons/icons';
-    import { useRouter } from 'vue-router';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonTextarea, IonTitle, IonToolbar, IonImg, toastController, IonSelect, IonSelectOption, IonSpinner } from '@ionic/vue';
+import { directus } from '@/services/directus.service';
+import { ref } from 'vue';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { trashOutline } from 'ionicons/icons';
+import { useRouter } from 'vue-router';
+import { INewGameAd } from '@/models/GameAdvertisementModels';
 
     const router = useRouter();
 
@@ -13,7 +14,7 @@
     const isUploadingGame = ref(false);
     
     // Keeps track of all data input from the user towards adding a new camp spot
-    const newGame = ref({
+    const newGame = ref<INewGameAd>({
         title: "",
         description: "",
         price: "",

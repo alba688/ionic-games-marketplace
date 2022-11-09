@@ -1,9 +1,10 @@
 <script setup lang="ts">
-    import { useRoute } from 'vue-router';
-    import { IonContent, IonPage, IonHeader, IonTitle, IonCardTitle, IonCardSubtitle, IonCardContent, IonToolbar, IonButtons, IonButton, IonBackButton, IonCard, IonCardHeader, IonIcon, IonModal, IonTextarea, IonList, IonListHeader, IonLabel, IonItem, IonAvatar, IonText, onIonViewDidEnter, IonSpinner} from '@ionic/vue';
-    import { ref } from 'vue';
-    import { chatboxOutline, person, chatboxEllipsesOutline } from 'ionicons/icons';
-    import { directus } from '@/services/directus.service';
+  import { useRoute } from 'vue-router';
+  import { IonContent, IonPage, IonHeader, IonTitle, IonCardTitle, IonCardSubtitle, IonCardContent, IonToolbar, IonButtons, IonButton, IonBackButton, IonCard, IonCardHeader, IonIcon, IonModal, IonTextarea, IonList, IonListHeader, IonLabel, IonItem, IonAvatar, IonText, onIonViewDidEnter, IonSpinner} from '@ionic/vue';
+  import { ref } from 'vue';
+  import { chatboxOutline, person, chatboxEllipsesOutline } from 'ionicons/icons';
+  import { directus } from '@/services/directus.service';
+  import { IGameAd, IGameAdResponse } from '@/models/GameAdvertisementModels';
 
     /* Routing */
     const route = useRoute();
@@ -17,14 +18,14 @@
     const isLoadingDetail = ref(true);
 
     /* Dummy data */
-    const gameDetail = ref(null);
+    const gameDetail = ref<IGameAd | null>(null);
 
     onIonViewDidEnter(() => {
       fetchGameById();
     })
 
     const fetchGameById = async () => {
-      const response = await directus.graphql.items(`
+      const response = await directus.graphql.items<IGameAdResponse>(`
       query {
         game_market_by_id(id:${id}) {
           id,

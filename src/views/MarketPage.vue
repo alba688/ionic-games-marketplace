@@ -4,9 +4,10 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBu
 import { ref } from 'vue';
 import { logInOutline, person, add } from 'ionicons/icons';
 import GameCard from '@/components/GameCard.vue';
+import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
 
 
-  const gameAdvertisements = ref([]);
+  const gameAdvertisements = ref<IGameAd[]>([]);
 
   onIonViewDidEnter(() => {
       fetchAllGames();
@@ -18,7 +19,7 @@ import GameCard from '@/components/GameCard.vue';
   }
 
   const fetchAllGames = async () => {
-    const response = await directus.graphql.items(`
+    const response = await directus.graphql.items<IGameAdsResponse>(`
       query {
         game_market {
           id,
