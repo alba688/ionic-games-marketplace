@@ -48,14 +48,15 @@ import { ref } from 'vue';
         <ion-title v-if="isLoadingProfile"><ion-spinner></ion-spinner></ion-title>
         <ion-title v-if="currentUserName">Profile for {{currentUserName}}</ion-title>
     </ion-toolbar>
-    <ion-card class="ion-padding">
+      <ion-button fill="clear" expand="block" class="image-picker">
+          Choose file or take a picture 📸
+      </ion-button>
         <ion-button router-link="/add" expand="block" fill="solid" color="primary" class="ion-padding">
       Add game to marketplace
         </ion-button>
         <ion-button @click="logout" expand="block" fill="outline" color="primary" class="ion-padding">
       Log out of {{currentUserName}}'s account
         </ion-button>
-    </ion-card>
 
 
   </ion-content>
@@ -64,4 +65,12 @@ import { ref } from 'vue';
 
 <style scoped>
 
+.image-picker {
+    height: 20vh;
+    margin: 10px;
+    border: 2px #8a8a8a dashed;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: medium;
+}
 </style>

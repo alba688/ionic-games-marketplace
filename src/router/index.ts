@@ -15,7 +15,7 @@ const loginRequiredRouteGuard = async () => {
     const errorToast = await toastController.create({
       message: "You must first login or register",
       duration: 3000,
-      color: "warning"
+      color: "tertiary"
     });
 
     await errorToast.present();

@@ -1,28 +1,25 @@
 <script setup lang="ts">
-import { IonContent, IonPage, IonCard, IonButton, IonImg} from '@ionic/vue';
+import { IonContent, IonPage, IonCard, IonButton} from '@ionic/vue';
 
 </script>
 
 <template>
   <ion-page>
   
-  <ion-content :fullscreen="true">
-    <ion-card>
-      <ion-img
-          src="https://illlustrations.co/static/a8bffeb0395117a5c2d54c770d50e80e/ee604/day2-gaming-console.png"/>
-
-          <h1
-          class="ion-text-center ion-padding-bottom"
-          color="primary">Welcome to RetroTise</h1>
+  <ion-content :fullscreen="true" color="medium">
+    <div color="secondary">
+      <img src="../../public/assets/gaming-illustration.svg" class="ion-padding ion-margin-top"/>
+      <h1 class="ion-text-center ion-padding">Welcome to RetroTise</h1>
+      <h4 class="ion-text-center ion-padding">The best place to buy and sell all your favorite retro games.</h4>
+    </div>
+    <ion-card class="ion-padding">
+      <ion-button router-link="/login" expand="block" fill="solid" color="secondary" class="ion-padding">
+        Login to RetroTise
+      </ion-button>
+      <ion-button router-link="/market" expand="block" fill="outline" color="secondary" class="ion-padding ion-margin-bottom">
+        View Marketplace
+      </ion-button>
     </ion-card>
-
-    <ion-button router-link="/login" expand="block" fill="solid" color="primary" class="ion-padding ion-padding-bottom">
-      Login to RetroTise
-    </ion-button>
-    <ion-button router-link="/market" expand="block" fill="outline" color="primary" class="ion-padding">
-      View Marketplace
-    </ion-button>
-
 
   </ion-content>
 </ion-page>
@@ -30,4 +27,9 @@ import { IonContent, IonPage, IonCard, IonButton, IonImg} from '@ionic/vue';
 
 <style scoped>
 
+.example {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+}
 </style>

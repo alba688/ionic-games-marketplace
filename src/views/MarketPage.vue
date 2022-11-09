@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { directus } from '@/services/directus.service';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import { ref } from 'vue';
 import { logInOutline, person, add } from 'ionicons/icons';
 import GameCard from '@/components/GameCard.vue';
@@ -43,32 +43,35 @@ import GameCard from '@/components/GameCard.vue';
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-toolbar>
+      <ion-toolbar color="primary">
         <ion-buttons slot="start">
           <ion-button router-link="/profile">
             <ion-icon :icon="person"></ion-icon>
           </ion-button>
         </ion-buttons>
-        <ion-title>RetroTise 🎮</ion-title>
+        
         <ion-buttons slot="end">
             <ion-button router-link="/login">
               <ion-icon :icon="logInOutline"></ion-icon>
             </ion-button>
         </ion-buttons>
-      </ion-toolbar>
+      <ion-title>RetroTise 🎮</ion-title>
+    </ion-toolbar>
     </ion-header>
     
-    <ion-content :fullscreen="true">
+    <ion-content :fullscreen="true" color="light">
+      <!--Refresh for new listing-->
       <ion-refresher slot="fixed" @ionRefresh="refreshGamesView($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
+      <!--Component for game listings-->
       <game-card v-for="game in gameAdvertisements" :key="game.id" :game="game"/>
-        
-        <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-            <ion-fab-button router-link="/add">
-                <ion-icon :icon="add"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>
+      <!-- Add button-->
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button router-link="/add">
+          <ion-icon :icon="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-content>
   </ion-page>
 </template>

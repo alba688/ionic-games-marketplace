@@ -44,47 +44,45 @@ import { useRouter } from 'vue-router';
 <template>
     <ion-page>
   
-      <ion-content :fullscreen="true">
+      <ion-content :fullscreen="true" color="light">
         <ion-header :translucent="true">
-          <ion-toolbar>
+          <ion-toolbar color="primary">
             <ion-buttons slot="start">
                 <ion-back-button default-href="/"></ion-back-button>
             </ion-buttons>
             <ion-title>Login Page</ion-title>
           </ion-toolbar>
         </ion-header>
-            <ion-img
-              src="https://illlustrations.co/static/a8bffeb0395117a5c2d54c770d50e80e/ee604/day2-gaming-console.png"/>
-
+          <img src="../../public/assets/gaming-illustration2.svg" class="ion-padding ion-margin-top"/>
               <h1
               class="ion-text-center ion-padding-bottom"
               color="primary">Login to RetroTise</h1>
 
-        <ion-item lines="none">
-          <ion-label class="label-mild">New user?</ion-label>
+        <ion-item lines="none" color="light">
+          <ion-label class=" label-mild"><h2>New user?</h2></ion-label>
           <ion-toggle color="secondary" @ion-change="inRegisterMode = !inRegisterMode"></ion-toggle>
         </ion-item>
 
-        <ion-item v-if="inRegisterMode">
+        <ion-item v-if="inRegisterMode" color="light">
           <ion-label class="label-mild" position="floating">First Name</ion-label>
           <ion-input v-model="userDetails.firstName"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item color="light">
           <ion-label class="label-mild" position="floating">Email</ion-label>
           <ion-input type="email" v-model="userDetails.email"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item color="light" class="ion-padding-bottom">
             <ion-label class="label-mild" position="floating">Password</ion-label>
             <ion-input type="password" v-model="userDetails.password"></ion-input>
         </ion-item>
 
-        <ion-button @click="register" v-if="inRegisterMode" class="button-auth" expand="block" fill="solid" color="primary" size="default">
+        <ion-button @click="register" v-if="inRegisterMode" class="button-auth" expand="block" fill="solid" color="secondary" size="default">
           Register
         </ion-button>
 
-        <ion-button @click="login" v-else class="button-auth" expand="block" fill="solid" color="primary" size="default">
+        <ion-button @click="login" v-else class="button-auth" expand="block" fill="solid" color="secondary" size="default">
           Login
         </ion-button>
 
