@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { directus } from '@/services/directus.service';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent} from '@ionic/vue';
 import { ref } from 'vue';
 import { logInOutline, person, add } from 'ionicons/icons';
 import GameCard from '@/components/GameCard.vue';
