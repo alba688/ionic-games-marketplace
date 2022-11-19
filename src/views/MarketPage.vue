@@ -2,7 +2,7 @@
 import { directus } from '@/services/directus.service';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent, IonList, IonItem, IonSelect, IonSelectOption} from '@ionic/vue';
 import { ref } from 'vue';
-import { logInOutline, person, add, gameController } from 'ionicons/icons';
+import { logInOutline, person, add } from 'ionicons/icons';
 import GameCard from '@/components/GameCard.vue';
 import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
 
@@ -114,7 +114,7 @@ import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
       <game-card v-for="game in gameAdvertisements" :key="game.id" :game="game"/>
       <!-- Add button-->
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button router-link="/add">
+        <ion-fab-button color="tertiary" router-link="/add">
           <ion-icon :icon="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>

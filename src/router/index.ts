@@ -37,8 +37,6 @@ const loginRequiredRouteGuard = async () => {
     await authService.logout();
     return { name: "Login" }
   }
-
-
 } 
 
 const routes: Array<RouteRecordRaw> = [

@@ -4,6 +4,7 @@ import { IonContent, IonButton, IonToggle, IonInput, IonItem, IonLabel, IonPage,
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+
   const router = useRouter();
     
   /* State */
@@ -30,10 +31,8 @@ import { useRouter } from 'vue-router';
 
   const register = async () => {
     try {
-      const wasRegistered = await authService.register(userDetails.value.firstName, userDetails.value.email, userDetails.value.password);
-      if (wasRegistered) {
-        await login();
-      }
+      await authService.register(userDetails.value.firstName, userDetails.value.email, userDetails.value.password);
+      await login()
     } catch (error) {
       console.error(error);
     }

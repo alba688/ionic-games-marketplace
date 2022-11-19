@@ -20,6 +20,7 @@ import { INewGameAd } from '@/models/GameAdvertisementModels';
         price: "",
         platform: "",
         condition: "",
+        address: "",
         image: ""
     });
 
@@ -71,6 +72,7 @@ import { INewGameAd } from '@/models/GameAdvertisementModels';
                     price: newGame.value.price,
                     platform: newGame.value.platform,
                     condition: newGame.value.condition,
+                    address: newGame.value.address,
                     image: fileUpload.id
                 });
 
@@ -161,6 +163,10 @@ import { INewGameAd } from '@/models/GameAdvertisementModels';
                 <ion-item>
                     <ion-label class="label-mild" position="floating">Platform</ion-label>
                     <ion-textarea type="text" v-model="newGame.platform"></ion-textarea>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="label-mild" position="floating">Address</ion-label>
+                    <ion-textarea type="text" v-model="newGame.address"></ion-textarea>
                 </ion-item>
 
                 <ion-button @click="postNewGame" class="button-add" :disabled="isUploadingGame" fill="solid" color="secondary" size="default">

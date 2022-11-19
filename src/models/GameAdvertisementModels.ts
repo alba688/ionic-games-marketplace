@@ -5,6 +5,7 @@ export interface IGameAd {
     platform: string;
     description: string;
     condition: string;
+    address: string;
     image: {
         id: string;
     };
@@ -27,5 +28,6 @@ export interface INewGameAd {
     price: number;
     platform: string;
     condition: string;
+    address: string;
     image: string;
 }
