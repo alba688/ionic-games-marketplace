@@ -1,16 +1,32 @@
 <script setup lang="ts">
 import { directus } from '@/services/directus.service';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent} from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon, IonFab, IonFabButton, onIonViewDidEnter, IonRefresher, IonRefresherContent, IonList, IonItem, IonSelect, IonSelectOption} from '@ionic/vue';
 import { ref } from 'vue';
-import { logInOutline, person, add } from 'ionicons/icons';
+import { logInOutline, person, add, gameController } from 'ionicons/icons';
 import GameCard from '@/components/GameCard.vue';
 import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
 
 
   const gameAdvertisements = ref<IGameAd[]>([]);
 
+  /* pulls in platforms for user selection */
+  const uniquePlatforms = new Set();
+
+
+
+
+  const selectPlatform = (event: CustomEvent) => {
+    gameAdvertisements.value.filter
+      let platform = event.detail.value
+      console.log(platform);
+      fetchSelectedGames(platform);
+  }
+
   onIonViewDidEnter(() => {
       fetchAllGames();
+      gameAdvertisements.value.forEach(element => {
+        uniquePlatforms.add(element.platform)
+      });
   })
 
   const refreshGamesView = async (event: CustomEvent) => {
@@ -36,8 +52,32 @@ import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
     if (response.status === 200 && response.data) {
       gameAdvertisements.value = [...response.data.game_market];
       console.log(gameAdvertisements.value);
+      gameAdvertisements.value.forEach(element => {
+        uniquePlatforms.add(element.platform)
+      });
     }
   };
+
+  const fetchSelectedGames = async (platform: string) => {
+    const response = await directus.graphql.items<IGameAdsResponse>(`
+      query {
+        game_market(filter: { platform: { _contains: "${platform}" } }) {
+          id,
+          title,
+          platform,
+          condition,
+          image {
+            id,
+          }
+        }
+      }
+    `);
+
+    if (response.status === 200 && response.data) {
+      gameAdvertisements.value = [...response.data.game_market];
+      console.log(gameAdvertisements.value);
+    }
+  }
 
 </script>
 
@@ -65,6 +105,19 @@ import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
       <ion-refresher slot="fixed" @ionRefresh="refreshGamesView($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
+      <!--Filter game listings-->
+      <ion-list>
+        <ion-item>
+          <ion-select 
+            placeholder="Select platform"
+            id="platform-list"
+            @ionChange="selectPlatform($event)"
+            @ionCancel="refreshGamesView($event)"
+          >
+            <ion-select-option v-for="platform in uniquePlatforms" :value="platform" :key="platform"> {{platform}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
       <!--Component for game listings-->
       <game-card v-for="game in gameAdvertisements" :key="game.id" :game="game"/>
       <!-- Add button-->
