@@ -12,9 +12,6 @@ import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
   /* pulls in platforms for user selection */
   const uniquePlatforms = new Set();
 
-
-
-
   const selectPlatform = (event: CustomEvent) => {
     gameAdvertisements.value.filter
       let platform = event.detail.value
@@ -24,9 +21,6 @@ import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
 
   onIonViewDidEnter(() => {
       fetchAllGames();
-      gameAdvertisements.value.forEach(element => {
-        uniquePlatforms.add(element.platform)
-      });
   })
 
   const refreshGamesView = async (event: CustomEvent) => {
@@ -110,9 +104,7 @@ import { IGameAd, IGameAdsResponse } from '@/models/GameAdvertisementModels';
         <ion-item>
           <ion-select 
             placeholder="Select platform"
-            id="platform-list"
             @ionChange="selectPlatform($event)"
-            @ionCancel="refreshGamesView($event)"
           >
             <ion-select-option v-for="platform in uniquePlatforms" :value="platform" :key="platform"> {{platform}} </ion-select-option>
           </ion-select>
