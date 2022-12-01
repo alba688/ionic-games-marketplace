@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IonContent, IonPage, IonButton, IonIcon, IonToolbar, IonButtons, IonBackButton, IonTitle, onIonViewDidEnter, IonSpinner} from '@ionic/vue';
+import { IonContent, IonPage, IonButton, IonToolbar, IonButtons, IonBackButton, IonTitle, onIonViewDidEnter, IonSpinner} from '@ionic/vue';
 import { authService } from '@/services/directus.service';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';

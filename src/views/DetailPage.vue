@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router';
-  import { IonContent, IonPage, IonHeader, IonTitle, IonCardTitle, IonCardSubtitle, IonCardContent, IonToolbar, IonButtons, IonButton, IonBackButton, IonCard, IonCardHeader, IonIcon, IonModal, IonTextarea, IonList, IonListHeader, IonLabel, IonItem, IonAvatar, IonText, onIonViewDidEnter, IonSpinner} from '@ionic/vue';
+  import { IonContent, IonPage, IonHeader, IonTitle, IonCardTitle, IonCardSubtitle, IonCardContent, IonToolbar, IonButtons, IonButton, IonBackButton, IonCard, IonCardHeader, IonIcon, onIonViewDidEnter, IonSpinner} from '@ionic/vue';
   import { ref } from 'vue';
-  import { chatboxOutline, person, chatboxEllipsesOutline } from 'ionicons/icons';
+  import { chatboxEllipsesOutline } from 'ionicons/icons';
   import { directus } from '@/services/directus.service';
   import { IGameAd, IGameAdResponse } from '@/models/GameAdvertisementModels';
 
